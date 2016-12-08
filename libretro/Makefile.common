@@ -183,6 +183,7 @@ SOURCES_CXX += $(COREDIR)/AudioCommon/AudioCommonLibretro.cpp \
 SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/CDUtils.cpp \
 					$(CORECOMMONDIR)/ColorUtil.cpp \
+					$(CORECOMMONDIR)/ENetUtil.cpp \
 					$(CORECOMMONDIR)/FileSearch.cpp \
 					$(CORECOMMONDIR)/FileUtil.cpp \
 					$(CORECOMMONDIR)/GekkoDisassembler.cpp \
@@ -190,6 +191,7 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/IniFile.cpp \
 					$(CORECOMMONDIR)/JitRegister.cpp \
 					$(CORECOMMONDIR)/MathUtil.cpp \
+					$(CORECOMMONDIR)/MD5.cpp \
 					$(CORECOMMONDIR)/MemArena.cpp \
 					$(CORECOMMONDIR)/MemoryUtil.cpp \
 					$(CORECOMMONDIR)/Misc.cpp \
@@ -206,12 +208,19 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/SysConf.cpp \
 					$(CORECOMMONDIR)/Thread.cpp \
 					$(CORECOMMONDIR)/Timer.cpp \
+					$(CORECOMMONDIR)/TraversalClient.cpp \
+					$(CORECOMMONDIR)/TraversalServer.cpp \
+					$(CORECOMMONDIR)/ucrtFreadWorkaround.cpp \
 					$(CORECOMMONDIR)/VersionLibretro.cpp \
 					$(CORECOMMONDIR)/Crypto/bn.cpp \
 					$(CORECOMMONDIR)/Crypto/ec.cpp \
 					$(CORECOMMONDIR)/Logging/ConsoleListenerLibretro.cpp \
 					$(CORECOMMONDIR)/Logging/LogManager.cpp \
 					$(CORECOMMONDIR)/Analytics.cpp
+
+SOURCES_CXX += $(CORECOMMONDIR)/GL/GLUtil.cpp \
+					$(CORECOMMONDIR)/GL/GLInterface/GLInterface.cpp \
+					$(CORECOMMONDIR)/GL/GLInterface/LibretroGL.cpp
 
 ifeq ($(WITH_DYNAREC), x86_64)
 CPUFLAGS := -msse -msse2 -D_M_X86 -D_M_X86_64 -D_ARCH_64
@@ -250,7 +259,6 @@ SOURCES_CXX += $(COREDIR)/DiscIO/Blob.cpp \
 					$(COREDIR)/DiscIO/VolumeGC.cpp \
 					$(COREDIR)/DiscIO/VolumeWad.cpp \
 					$(COREDIR)/DiscIO/VolumeWiiCrypted.cpp \
-					$(COREDIR)/DiscIO/WbfsBlob.cpp \
 					$(COREDIR)/DiscIO/WiiWad.cpp
 
 #Target videosoftware
@@ -258,7 +266,6 @@ SOURCES_CXX += $(COREDIR)/VideoBackends/Software/Clipper.cpp \
 					$(COREDIR)/VideoBackends/Software/DebugUtil.cpp \
 					$(COREDIR)/VideoBackends/Software/EfbCopy.cpp \
 					$(COREDIR)/VideoBackends/Software/EfbInterface.cpp \
-					$(COREDIR)/VideoBackends/Software/Rasterizer.cpp \
 					$(COREDIR)/VideoBackends/Software/SetupUnit.cpp \
 					$(COREDIR)/VideoBackends/Software/SWmain.cpp \
 					$(COREDIR)/VideoBackends/Software/Rasterizer.cpp \
@@ -289,7 +296,9 @@ SOURCES_CXX += \
 					$(COREDIR)/VideoBackends/OGL/VertexManager.cpp
 
 # Target video common
-SOURCES_CXX += $(COREDIR)/VideoCommon/BoundingBox.cpp \
+SOURCES_CXX += \
+					$(COREDIR)/VideoCommon/AsyncRequests.cpp \
+					$(COREDIR)/VideoCommon/BoundingBox.cpp \
 					$(COREDIR)/VideoCommon/BPFunctions.cpp \
 					$(COREDIR)/VideoCommon/BPMemory.cpp \
 					$(COREDIR)/VideoCommon/BPStructs.cpp \
@@ -433,6 +442,7 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/HW/DSPLLE/DSPLLE.cpp \
 					$(COREDIR)/Core/HW/DSPLLE/DSPLLETools.cpp \
 					$(COREDIR)/Core/HW/DVDInterface.cpp \
+					$(COREDIR)/Core/HW/DVDThread.cpp \
 					$(COREDIR)/Core/HW/EXI_Channel.cpp \
 					$(COREDIR)/Core/HW/EXI.cpp \
 					$(COREDIR)/Core/HW/EXI_Device.cpp \
@@ -476,7 +486,6 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_es.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_FileIO.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_fs.cpp \
-					$(COREDIR)/Core/IPC_HLE/WII_Socket.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_net.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_net_ssl.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_sdio_slot0.cpp \
