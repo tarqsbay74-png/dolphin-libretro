@@ -97,3 +97,7 @@ void Host_RefreshDSPDebuggerWindow()
 {
 	// TODO
 }
+
+void Host_YieldToUI()
+{
+}

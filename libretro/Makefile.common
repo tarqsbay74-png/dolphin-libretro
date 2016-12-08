@@ -27,7 +27,7 @@ SOURCES_C   += \
 					$(EXTDIR)/enet/peer.c \
 					$(EXTDIR)/enet/protocol.c
 
-SOURCES_C += \
+#SOURCES_C += \
 					$(EXTDIR)/enet/unix.c
 
 # Target PolarSSL
@@ -210,7 +210,8 @@ SOURCES_CXX += $(CORECOMMONDIR)/BreakPoints.cpp \
 					$(CORECOMMONDIR)/Crypto/bn.cpp \
 					$(CORECOMMONDIR)/Crypto/ec.cpp \
 					$(CORECOMMONDIR)/Logging/ConsoleListenerLibretro.cpp \
-					$(CORECOMMONDIR)/Logging/LogManager.cpp
+					$(CORECOMMONDIR)/Logging/LogManager.cpp \
+					$(CORECOMMONDIR)/Analytics.cpp
 
 ifeq ($(WITH_DYNAREC), x86_64)
 CPUFLAGS := -msse -msse2 -D_M_X86 -D_M_X86_64 -D_ARCH_64
@@ -270,7 +271,9 @@ SOURCES_CXX += $(COREDIR)/VideoBackends/Software/Clipper.cpp \
 					$(COREDIR)/VideoBackends/Software/SWOGLWindow.cpp
 
 #Target video GL
-SOURCES_CXX += $(COREDIR)/VideoBackends/OGL/BoundingBox.cpp \
+SOURCES_CXX += \
+					$(COREDIR)/Common/GL/GLExtensions/GLExtensions.cpp \
+					$(COREDIR)/VideoBackends/OGL/BoundingBox.cpp \
 					$(COREDIR)/VideoBackends/OGL/FramebufferManager.cpp \
 					$(COREDIR)/VideoBackends/OGL/main.cpp \
 					$(COREDIR)/VideoBackends/OGL/NativeVertexFormat.cpp \
@@ -307,6 +310,7 @@ SOURCES_CXX += $(COREDIR)/VideoCommon/BoundingBox.cpp \
 					$(COREDIR)/VideoCommon/OpcodeDecoding.cpp \
 					$(COREDIR)/VideoCommon/PerfQueryBase.cpp \
 					$(COREDIR)/VideoCommon/PixelEngine.cpp \
+					$(COREDIR)/VideoCommon/LightingShaderGen.cpp \
 					$(COREDIR)/VideoCommon/PixelShaderGen.cpp \
 					$(COREDIR)/VideoCommon/PixelShaderManager.cpp \
 					$(COREDIR)/VideoCommon/PostProcessing.cpp \
@@ -531,10 +535,12 @@ SOURCES_CXX += \
 					$(COREDIR)/Core/PowerPC/Interpreter/Interpreter_Tables.cpp
 
 SOURCES_CXX += \
+					$(COREDIR)/Core/PowerPC/JitCommon/JitBackpatch.cpp \
 					$(COREDIR)/Core/PowerPC/JitCommon/Jit_Util.cpp \
 					$(COREDIR)/Core/PowerPC/JitCommon/JitAsmCommon.cpp \
 					$(COREDIR)/Core/PowerPC/JitCommon/JitBase.cpp \
 					$(COREDIR)/Core/PowerPC/JitCommon/JitCache.cpp \
+					$(COREDIR)/Core/PowerPC/JitCommon/TrampolineCache.cpp \
 					$(COREDIR)/Core/PowerPC/JitILCommon/IR.cpp \
 					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_Branch.cpp \
 					$(COREDIR)/Core/PowerPC/JitILCommon/JitILBase_LoadStore.cpp \
@@ -563,10 +569,6 @@ SOURCES_CXX += $(COREDIR)/Core/PowerPC/Jit64IL/IR_X86.cpp \
 					$(COREDIR)/Core/PowerPC/Jit64/Jit_SystemRegisters.cpp \
 					$(COREDIR)/Core/PowerPC/Jit64Common/Jit64AsmCommon.cpp
 endif
-
-SOURCES_CXX += $(COREDIR)/Core/PowerPC/JitCommon/JitBackpatch.cpp \
-					$(COREDIR)/Core/PowerPC/JitCommon/Jit_Util.cpp \
-					$(COREDIR)/Core/PowerPC/JitCommon/TrampolineCache.cpp
 
 #libusb 
 #SOURCES_CXX += $(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_hid.cpp \
