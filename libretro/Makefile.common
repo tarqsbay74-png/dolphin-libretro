@@ -243,6 +243,7 @@ SOURCES_CXX += $(COREDIR)/InputCommon/ControllerEmu.cpp \
 
 #Target discIO
 SOURCES_CXX += $(COREDIR)/DiscIO/Blob.cpp \
+					$(COREDIR)/DiscIO/Enums.cpp \
 					$(COREDIR)/DiscIO/CISOBlob.cpp \
 					$(COREDIR)/DiscIO/WbfsBlob.cpp \
 					$(COREDIR)/DiscIO/CompressedBlob.cpp \
@@ -482,6 +483,7 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/HW/Wiimote.cpp \
 					$(COREDIR)/Core/HW/WiiSaveCrypted.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_DI.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_es.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_FileIO.cpp \
