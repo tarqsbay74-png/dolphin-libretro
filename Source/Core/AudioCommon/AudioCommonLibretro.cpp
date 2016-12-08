@@ -90,7 +90,7 @@ namespace AudioCommon
 			g_sound_stream->Clear(mute);
 	}
 
-	void SendAIBuffer(short *samples, unsigned int num_samples)
+	void SendAIBuffer(short const *samples, unsigned int num_samples)
 	{
 		if (!g_sound_stream)
 			return;
