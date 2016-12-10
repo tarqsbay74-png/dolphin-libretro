@@ -15,7 +15,15 @@ INCFLAGS := \
 	-I$(EXTDIR)/LZO \
 	-I$(EXTDIR)/mbedtls/include \
 	-I$(EXTDIR)/enet/include \
-	-I$(EXTDIR)/xxhash 
+	-I$(EXTDIR)/xxhash  \
+	-I$(EXTDIR)/libusb/libusb
+
+# Target libusb
+#SOURCES_C   += $(EXTDIR)/libusb/libusb/core.c
+
+#SOURCES_C   += \
+					$(EXTDIR)/libusb/libusb/descriptor.c \
+					$(EXTDIR)/libusb/libusb/hotplug.c
 
 # Target enet
 SOURCES_C   += \
@@ -29,6 +37,138 @@ SOURCES_C   += \
 
 #SOURCES_C += \
 					$(EXTDIR)/enet/unix.c
+
+# Target libcurl
+#SOURCES_C   += \
+					$(EXTDIR)/curl/lib/vtls/axtls.c \
+					$(EXTDIR)/curl/lib/vtls/cyassl.c \
+					$(EXTDIR)/curl/lib/vtls/darwinssl.c \
+					$(EXTDIR)/curl/lib/vtls/gskit.c \
+					$(EXTDIR)/curl/lib/vtls/gtls.c \
+					$(EXTDIR)/curl/lib/vtls/mbedtls.c \
+					$(EXTDIR)/curl/lib/vtls/nss.c \
+					$(EXTDIR)/curl/lib/vtls/openssl.c \
+					$(EXTDIR)/curl/lib/vtls/polarssl.c \
+					$(EXTDIR)/curl/lib/vtls/polarssl_threadlock.c \
+					$(EXTDIR)/curl/lib/vtls/schannel.c \
+					$(EXTDIR)/curl/lib/vtls/vtls.c \
+					\
+					$(EXTDIR)/curl/lib/vauth/cleartext.c \
+					$(EXTDIR)/curl/lib/vauth/cram.c \
+					$(EXTDIR)/curl/lib/vauth/digest.c \
+					$(EXTDIR)/curl/lib/vauth/digest_sspi.c \
+					$(EXTDIR)/curl/lib/vauth/krb5_gssapi.c \
+					$(EXTDIR)/curl/lib/vauth/krb5_sspi.c \
+					$(EXTDIR)/curl/lib/vauth/ntlm.c \
+					$(EXTDIR)/curl/lib/vauth/ntlm_sspi.c \
+					$(EXTDIR)/curl/lib/vauth/oauth2.c \
+					$(EXTDIR)/curl/lib/vauth/spnego_gssapi.c \
+					$(EXTDIR)/curl/lib/vauth/spnego_ssspi.c \
+					$(EXTDIR)/curl/lib/vauth/vauth.c \
+					\
+					$(EXTDIR)/curl/lib/amigaos.c \
+					$(EXTDIR)/curl/lib/asyn-ares.c \
+					$(EXTDIR)/curl/lib/asyn-thread.c \
+					$(EXTDIR)/curl/lib/base64.c \
+					$(EXTDIR)/curl/lib/conncache.c \
+					$(EXTDIR)/curl/lib/connect.c \
+					$(EXTDIR)/curl/lib/content_encoding.c \
+					$(EXTDIR)/curl/lib/cookie.c \
+					$(EXTDIR)/curl/lib/curl_addrinfo.c \
+					$(EXTDIR)/curl/lib/curl_des.c \
+					$(EXTDIR)/curl/lib/curl_endian.c \
+					$(EXTDIR)/curl/lib/curl_fnmatch.c \
+					$(EXTDIR)/curl/lib/curl_gethostname.c \
+					$(EXTDIR)/curl/lib/curl_gssapi.c \
+					$(EXTDIR)/curl/lib/curl_memrchr.c \
+					$(EXTDIR)/curl/lib/curl_multibyte.c \
+					$(EXTDIR)/curl/lib/curl_ntlm_core.c \
+					$(EXTDIR)/curl/lib/curl_ntlm_wb.c \
+					$(EXTDIR)/curl/lib/curl_rtmp.c \
+					$(EXTDIR)/curl/lib/curl_sasl.c \
+					$(EXTDIR)/curl/lib/curl_sspi.c \
+					$(EXTDIR)/curl/lib/curl_threads.c \
+					$(EXTDIR)/curl/lib/dict.c \
+					$(EXTDIR)/curl/lib/dotdot.c \
+					$(EXTDIR)/curl/lib/easy.c \
+					$(EXTDIR)/curl/lib/escape.c \
+					$(EXTDIR)/curl/lib/file.c \
+					$(EXTDIR)/curl/lib/fileinfo.c \
+					$(EXTDIR)/curl/lib/formdata.c \
+					$(EXTDIR)/curl/lib/ftp.c \
+					$(EXTDIR)/curl/lib/ftplistparser.c \
+					$(EXTDIR)/curl/lib/getenv.c \
+					$(EXTDIR)/curl/lib/getinfo.c \
+					$(EXTDIR)/curl/lib/gopher.c \
+					$(EXTDIR)/curl/lib/hash.c \
+					$(EXTDIR)/curl/lib/hmac.c \
+					$(EXTDIR)/curl/lib/hostasyn.c \
+					$(EXTDIR)/curl/lib/hostcheck.c \
+					$(EXTDIR)/curl/lib/hostip.c \
+					$(EXTDIR)/curl/lib/hostip4.c \
+					$(EXTDIR)/curl/lib/hostip6.c \
+					$(EXTDIR)/curl/lib/hostsyn.c \
+					$(EXTDIR)/curl/lib/http.c \
+					$(EXTDIR)/curl/lib/http2.c \
+					$(EXTDIR)/curl/lib/http_chunks.c \
+					$(EXTDIR)/curl/lib/http_digest.c \
+					$(EXTDIR)/curl/lib/http_negotiate.c \
+					$(EXTDIR)/curl/lib/http_ntlm.c \
+					$(EXTDIR)/curl/lib/http_proxy.c \
+					$(EXTDIR)/curl/lib/idn_win32.c \
+					$(EXTDIR)/curl/lib/if2ip.c \
+					$(EXTDIR)/curl/lib/imap.c \
+					$(EXTDIR)/curl/lib/inet_ntop.c \
+					$(EXTDIR)/curl/lib/inet_pton.c \
+					$(EXTDIR)/curl/lib/krb5.c \
+					$(EXTDIR)/curl/lib/ldap.c \
+					$(EXTDIR)/curl/lib/llist.c \
+					$(EXTDIR)/curl/lib/md4.c \
+					$(EXTDIR)/curl/lib/md5.c \
+					$(EXTDIR)/curl/lib/memdebug.c \
+					$(EXTDIR)/curl/lib/mprintf.c \
+					$(EXTDIR)/curl/lib/multi.c \
+					$(EXTDIR)/curl/lib/netrc.c \
+					$(EXTDIR)/curl/lib/non-ascii.c \
+					$(EXTDIR)/curl/lib/nonblock.c \
+					$(EXTDIR)/curl/lib/nwlib.c \
+					$(EXTDIR)/curl/lib/nwos.c \
+					$(EXTDIR)/curl/lib/openldap.c \
+					$(EXTDIR)/curl/lib/parsedate.c \
+					$(EXTDIR)/curl/lib/pingpong.c \
+					$(EXTDIR)/curl/lib/pipeline.c \
+					$(EXTDIR)/curl/lib/pop3.c \
+					$(EXTDIR)/curl/lib/progress.c \
+					$(EXTDIR)/curl/lib/rawstr.c \
+					$(EXTDIR)/curl/lib/rtsp.c \
+					$(EXTDIR)/curl/lib/security.c \
+					$(EXTDIR)/curl/lib/select.c \
+					$(EXTDIR)/curl/lib/sendf.c \
+					$(EXTDIR)/curl/lib/share.c \
+					$(EXTDIR)/curl/lib/slist.c \
+					$(EXTDIR)/curl/lib/smb.c \
+					$(EXTDIR)/curl/lib/smtp.c \
+					$(EXTDIR)/curl/lib/socks.c \
+					$(EXTDIR)/curl/lib/socks_gssapi.c \
+					$(EXTDIR)/curl/lib/socks_sspi.c \
+					$(EXTDIR)/curl/lib/speedcheck.c \
+					$(EXTDIR)/curl/lib/splay.c \
+					$(EXTDIR)/curl/lib/ssh.c \
+					$(EXTDIR)/curl/lib/strdup.c \
+					$(EXTDIR)/curl/lib/strequal.c \
+					$(EXTDIR)/curl/lib/strerror.c \
+					$(EXTDIR)/curl/lib/strtok.c \
+					$(EXTDIR)/curl/lib/strtoofft.c \
+					$(EXTDIR)/curl/lib/system_win32.c \
+					$(EXTDIR)/curl/lib/telnet.c \
+					$(EXTDIR)/curl/lib/tftp.c \
+					$(EXTDIR)/curl/lib/timeval.c \
+					$(EXTDIR)/curl/lib/transfer.c \
+					$(EXTDIR)/curl/lib/url.c \
+					$(EXTDIR)/curl/lib/version.c \
+					$(EXTDIR)/curl/lib/warnless.c \
+					$(EXTDIR)/curl/lib/wildcard.c \
+					$(EXTDIR)/curl/lib/x509asn1.c \
 
 # Target PolarSSL
 SOURCES_C   += $(EXTDIR)/mbedtls/library/asn1write.c \
@@ -163,8 +303,7 @@ SOURCES_CXX += $(EXTDIR)/SFML/src/SFML/Network/Unix/SocketImpl.cpp
 #SOURCES_CXX += $(EXTDIR)/SFML/src/SFML/Network/Win32/SocketImpl.cpp
 
 # Target XXHASH
-SOURCES_C   += $(EXTDIR)/xxhash/xxhash.c \
-					$(EXTDIR)/xxhash/xxhsum.c
+SOURCES_C   += $(EXTDIR)/xxhash/xxhash.c
 
 # Target SOIL
 SOURCES_C   += $(EXTDIR)/SOIL/image_DXT.c \
@@ -237,6 +376,7 @@ endif
 #Target inputcommon
 SOURCES_CXX += $(COREDIR)/InputCommon/ControllerEmu.cpp \
 					$(COREDIR)/InputCommon/InputConfig.cpp \
+					$(COREDIR)/InputCommon/GCAdapter.cpp \
 					$(COREDIR)/InputCommon/ControllerInterface/ControllerInterface.cpp \
 					$(COREDIR)/InputCommon/ControllerInterface/Device.cpp \
 					$(COREDIR)/InputCommon/ControllerInterface/ExpressionParser.cpp
@@ -493,6 +633,7 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_sdio_slot0.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_stm.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_stub.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_emu.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_kbd.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_ven.cpp \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_WiiMote.cpp \
@@ -504,12 +645,13 @@ SOURCES_CXX += $(COREDIR)/Core/ActionReplay.cpp \
 SOURCES_CXX += \
 					$(COREDIR)/Core/IPC_HLE/ICMPLin.cpp \
 
-#SOURCES_CXX += \
-					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_hid.cpp \
+SOURCES_CXX +=	$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_hid.cpp
+
+#SOURCES_CXX += $(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_real.cpp
+
+SOURCES_CXX += \
 					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_base.cpp \
-					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_emu.cpp \
-					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_real.cpp \
-					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_stub.cpp \
+					$(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_usb_bt_stub.cpp
 
 SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteEmu/WiimoteEmu.cpp \
 					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Classic.cpp \
@@ -520,7 +662,7 @@ SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteEmu/WiimoteEmu.cpp \
 					$(COREDIR)/Core/HW/WiimoteEmu/Attachment/Turntable.cpp \
 					$(COREDIR)/Core/HW/WiimoteEmu/EmuSubroutines.cpp \
 					$(COREDIR)/Core/HW/WiimoteEmu/Encryption.cpp \
-					$(COREDIR)/Core/HW/WiimoteEmu/Speaker.cpp \
+					$(COREDIR)/Core/HW/WiimoteEmu/Speaker.cpp
 
 SOURCES_CXX += $(COREDIR)/Core/HW/WiimoteReal/WiimoteReal.cpp 
 
@@ -582,8 +724,7 @@ SOURCES_CXX += $(COREDIR)/Core/PowerPC/Jit64IL/IR_X86.cpp \
 endif
 
 #libusb 
-#SOURCES_CXX += $(COREDIR)/Core/IPC_HLE/WII_IPC_HLE_Device_hid.cpp \
-					 $(COREDIR)/Core/HW/SI_GCAdapter.cpp
+#SOURCES_CXX += $(COREDIR)/Core/HW/SI_GCAdapter.cpp
 
 # Unix-only
 SOURCES_CXX += $(COREDIR)/Core/HW/BBA-TAP/TAP_Unix.cpp
