@@ -28,7 +28,7 @@ jobs:
           cmake --build . -- -j2
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dolphin-libretro-armv7
           path: build/dolphin_libretro_android.so
