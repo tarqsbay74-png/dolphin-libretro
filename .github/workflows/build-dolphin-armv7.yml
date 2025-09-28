@@ -23,10 +23,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build pkg-config zlib1g-dev
 
-      # تعديل CMakeLists.txt لتفعيل Generic build بدون JIT
+      # تعديل CMakeLists.txt لتفعيل Generic build بدون JIT قبل رسالة الخطأ
       - name: Patch CMake for Generic ARMv7
         run: |
-          sed -i '/unsupported platform/i\
+          sed -i '/message(FATAL_ERROR "You'\''re building on an unsupported platform/ i\
           set(DOLPHIN_ENABLE_JIT OFF CACHE BOOL "Disable JIT for unsupported platforms")\n\
           set(DOLPHIN_GENERIC_BUILD ON CACHE BOOL "Enable generic JIT-less build")' CMakeLists.txt
 
