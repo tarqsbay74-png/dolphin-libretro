@@ -1,0 +1,51 @@
+name: Build Dolphin Libretro (Android ARMv7)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # استنساخ المستودع
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # تثبيت Android NDK
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r23b
+
+      # تثبيت الاعتماديات
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config zlib1g-dev
+
+      # تعديل CMakeLists.txt لتفعيل Generic build بدون JIT
+      - name: Patch CMake for Generic ARMv7
+        run: |
+          sed -i '/unsupported platform/i\
+          set(DOLPHIN_ENABLE_JIT OFF CACHE BOOL "Disable JIT for unsupported platforms")\n\
+          set(DOLPHIN_GENERIC_BUILD ON CACHE BOOL "Enable generic JIT-less build")' CMakeLists.txt
+
+      # إعداد وبناء المشروع
+      - name: Configure & Build (ARMv7)
+        run: |
+          mkdir -p build && cd build
+          cmake .. \
+            -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+            -DANDROID_ABI=armeabi-v7a \
+            -DANDROID_PLATFORM=android-21 \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DDOLPHIN_ENABLE_JIT=OFF \
+            -DDOLPHIN_GENERIC_BUILD=ON
+          cmake --build . -- -j1
+
+      # رفع الملف النهائي كـ Artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dolphin-libretro-armv7
+          path: build/dolphin_libretro_android.so
