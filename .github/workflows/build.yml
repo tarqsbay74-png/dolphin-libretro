@@ -1,0 +1,34 @@
+name: Build Dolphin Libretro
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install deps
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
+
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r27
+
+      - name: Build core
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+            -DANDROID_ABI=armeabi-v7a \
+            -DANDROID_PLATFORM=android-19 \
+            -DENABLE_GENERIC=ON
+          make -j4
+
+      - name: Upload core
+        uses: actions/upload-artifact@v4
+        with:
+          name: dolphin-libretro-android
+          path: build/*.so
