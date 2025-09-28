@@ -219,6 +219,8 @@ elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch64")
 	add_definitions(-D_M_ARM=1 -D_M_ARM_64=1)
 	add_definitions(-march=armv8-a+crc)
 else()
+set(DOLPHIN_ENABLE_JIT OFF CACHE BOOL "Disable JIT for unsupported platforms")
+set(DOLPHIN_GENERIC_BUILD ON CACHE BOOL "Enable generic JIT-less build")
 	message(FATAL_ERROR "You're building on an unsupported platform. Enable generic build if you really want a JIT-less binary.")
 endif()
 
