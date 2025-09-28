@@ -7,17 +7,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # استنساخ المستودع
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
+      # تثبيت Android NDK
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r21e
+          ndk-version: r23b  # جرب نسخة حديثة لضمان التوافق
 
+      # تثبيت الاعتماديات
       - name: Install deps
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build pkg-config
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build pkg-config zlib1g-dev
 
+      # إعداد وبناء المشروع
       - name: Configure & Build (ARMv7)
         run: |
           mkdir -p build && cd build
@@ -25,8 +31,9 @@ jobs:
             -DANDROID_ABI=armeabi-v7a \
             -DANDROID_PLATFORM=android-19 \
             -DCMAKE_BUILD_TYPE=Release
-          cmake --build . -- -j2
+          cmake --build . -- -j1
 
+      # رفع الملف النهائي كـ Artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
