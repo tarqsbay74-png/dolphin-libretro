@@ -1,4 +1,4 @@
-name: Build Dolphin Libretro
+name: Build Dolphin Libretro (Android ARMv7)
 
 on:
   workflow_dispatch:
@@ -6,29 +6,37 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
 
-      - name: Install deps
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
+    steps:
+      - name: Checkout source with submodules
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
 
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
+          ndk-version: r27c   # آخر إصدار ثابت للـ NDK
 
-      - name: Build core
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build pkg-config
+
+      - name: Configure & Build (ARMv7)
         run: |
-          mkdir build && cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+          mkdir -p build && cd build
+          cmake .. \
+            -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI=armeabi-v7a \
-            -DANDROID_PLATFORM=android-19 \
-            -DENABLE_GENERIC=ON
-          make -j4
+            -DANDROID_PLATFORM=android-21 \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DENABLE_JIT=OFF \
+            -DLIBRETRO=ON
+          ninja -j2
 
-      - name: Upload core
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dolphin-libretro-android
-          path: build/*.so
+          name: dolphin-libretro-armv7
+          path: build/dolphin_libretro_android.so
