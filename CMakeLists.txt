@@ -14,7 +14,7 @@ if(ANDROID)
 endif()
 
 add_library(dolphin_libretro_android SHARED
-    Source/Core/Core.cpp
+    Source/Core/core/Core.cpp
     # Add all required source files here
 )
 
